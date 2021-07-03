@@ -5,6 +5,7 @@ import indexOf from 'lodash/indexOf';
 import findIndex from 'lodash/findIndex';
 import './App.scss';
 import TreeView from './okrView';
+import uuid from 'react-uuid'
 
 
 const App = () => {
@@ -78,7 +79,7 @@ const App = () => {
         <label> Select filters :</label>
         <select value={selectedfilter} onChange={handleChange}>
           {map(filters, (item) => {
-            return <option name={item} value={item}> {item}</option>
+            return <option name={item} value={item} key ={uuid()}> {item}</option>
           }
           )}
         </select>
