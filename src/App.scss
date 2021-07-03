@@ -61,17 +61,17 @@ ul {
     &:before {
       content: "";
       position: absolute;
-      top:-10px;
+      // top:-10px;
       left:$left;
       border-left: 1px solid $border;
       border-bottom:1px solid $border;
       width:$ident;
-      height:15px;
+      height:30px;
     }
     &:after {
       position:absolute;
       content:"";
-      top:5px;
+      top:30px;
       left:$left;
       border-left: 1px solid $border;
       border-top:1px solid $border;
@@ -84,47 +84,68 @@ ul {
     span {
       display:block;
       border: 1px solid $border;
-      padding:10px;
+      padding:20px;
       color:$text;
       text-decoration:none;
+      cursor: pointer;
     }
   }
  } 
 }
 
-// .wtree {
-//   li {
-//     span {
-//       &:hover,
-//       &:focus {
-//         background: $bg-hover; 
-//         color: $text-hover; 
-//         border: 1px solid $border-hover;
-//         & + ul {
-//           li {
-//             span {
-//               background: $bg-hover; 
-//               color: $text-hover; 
-//               border: 1px solid $border-hover;
-//             }
-//           }
-//         }
-//       }
+.wtree {
+  ul {
+    li {
+      span {
+        &:hover,
+        &:focus {
+          background: $bg-hover; 
+          color: $text-hover; 
+          border: 1px solid $border-hover;
+          & + ul {
+            li {
+              span {
+                background: $bg-hover; 
+                color: $text-hover; 
+                border: 1px solid $border-hover;
+              }
+            }
+          }
+        }
 
-//       &:hover + ul, 
-//       &:focus + ul {
-//         li {
-//           &:after,&:before {
-//             border-color:  $border-hover;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+        &:hover + ul, 
+        &:focus + ul {
+          li {
+            &:after,&:before {
+              border-color:  $border-hover;
+              background: $bg-hover;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 .panel-group {
   margin-top: 30px;
+}
+.arrow {
+  width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 7px solid #555;
+  display: inline-block;
+}
+.up {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+}
+
+.down {
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
 }
 
 
@@ -135,4 +156,12 @@ ul {
 }
 .panel-close {
   max-height: 0;
+}
+.panel-title{
+  cursor: pointer;
+}
+
+.filter{
+  display: block;
+  text-align: right;
 }

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import map from 'lodash/map';
 import filter from 'lodash/filter';
 import indexOf from 'lodash/indexOf';
-
+import findIndex from 'lodash/findIndex';
 import './App.scss';
+import TreeView from './okrView';
 
 
 const App = () => {
@@ -19,23 +20,26 @@ const App = () => {
       .then(results => results.json())
       .then(data => {
         customizeData(data.data);
-
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const updatedParents = filter(allData, (item) => item.parent_objective_id == '' && item.category == selectedfilter);
-    const updated = getChildData(updatedParents);
+    const updatedParents = filter(allData, (item) => item.parent_objective_id === '' && item.category === selectedfilter);
+    const updated = getChildData(updatedParents, allData);
     setFilteredData(updated);
   }, [selectedfilter]);
 
-  const getChildData = (parents) => {
+  useEffect(() => {
+ 
+  }, [isOpen]);
+
+
+  const getChildData = (parents, allData) => {
     return map(parents, (item) => {
       const id = item.id;
       item.open = true;
       const preentdata = item;
-      const data = filter(allData, (item) => item.parent_objective_id == id);
+      const data = filter(allData, (item) => item.parent_objective_id === id);
       return {
         parents: preentdata,
         child: data
@@ -43,6 +47,7 @@ const App = () => {
     });
   }
   const customizeData = (allData) => {
+    setAllData(allData);
     const filterArray = [];
     map(allData, (item) => {
       if (indexOf(filterArray, item.category) === -1) {
@@ -50,88 +55,35 @@ const App = () => {
       }
     });
     setFilter(filterArray);
-    const getParents = filter(allData, (item) => item.parent_objective_id == '');
-    const getstrured = getChildData(getParents);
-    setAllData(allData);
+    const getParents = filter(allData, (item) => item.parent_objective_id === '');
+    const getstrured = getChildData(getParents, allData);
     setFilteredData(getstrured);
   };
 
-  const onToggle = (isOpen) => {
+  const onToggle = (item) => {
+    const index =findIndex(filteredData, ['parents.id' , item.id]);
+    filteredData[index].parents.open = !filteredData[index].parents.open;
+    setFilteredData(filteredData);
     setIsOpen(s => !s);
   }
 
   const handleChange = (e) => {
-    console.log("selected", e.target.value);
     setSelected(e.target.value);
   }
 
 
   return (
     <div className="App">
-      <div>
+      <div className ="filter">
+        <label> Select filters :</label>
         <select value={selectedfilter} onChange={handleChange}>
           {map(filters, (item) => {
-            console.log("filterdata",filteredData);
             return <option name={item} value={item}> {item}</option>
           }
           )}
         </select>
       </div>
-      <ul class="wtree">
-        <li>
-          <h4 className="panel-title">
-            <a href="#"
-              onClick={() => onToggle(isOpen)} >Collapsible list group</a>
-          </h4>
-          <div className={isOpen ? "panel-collapse" : "panel-collapse panel-close"} >
-            <ul>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li>
-          <h4 className="panel-title">
-            <a href="#"
-              onClick={() => onToggle(isOpen)} >Collapsible list group</a>
-          </h4>
-          <div className={isOpen ? "panel-collapse" : "panel-collapse panel-close"} >
-
-            <ul>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-              <li>
-                <span>Nivel 2</span>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-
+      <TreeView allData={filteredData} onToggle={onToggle} isOpen ={isOpen} ></TreeView>
     </div>
   );
 }
