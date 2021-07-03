@@ -1,195 +1,155 @@
+/* intialization */
 
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-/* css */
-$border: #ddd;
-$border-hover: #aaa;
+$border: #000;
+$border-hover: rgb(12, 1, 1);
 $bg-hover: #eee;
 $text: #888;
 $text-hover: #000;
-$ident: 20px;
-$left: -($ident);
+$ident: 25px;
+$left: ($ident);
+$background: #fff;
+$filter: #ff0000;
+
+/* reset */
 
 * {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-  padding:50px;
-  font-family:helvetica, arial,sans-serif;
+  padding: 10px;
+  margin: 10px;
+  font-family: helvetica, arial, sans-serif;
 }
+
 ul {
-  margin-left:$ident;
   list-style: none;
 }
+/*App container */
 
-
-.btn-custom {
-  border:none;
-  background-color:none;
-  background:none;
-  outline:none;
-  font-size: 20px;
-  position: relative;
-}
-
-.okrtree {
-  ul {
-    li {
-    list-style-type: none;
-    margin:10px 0 10px 10px;
-    position: relative;
-    &:before {
-      content: "";
-      position: absolute;
-      // top:-10px;
-      left:$left;
-      border-left: 1px solid $border;
-      border-bottom:1px solid $border;
-      width:$ident;
-      height:30px;
-    }
-    &:after {
-      position:absolute;
-      content:"";
-      top:30px;
-      left:$left;
-      border-left: 1px solid $border;
-      border-top:1px solid $border;
-      width:$ident;
-      height:100%;
-    }
-    &:last-child:after {
-      display:none;
-    }
-    span {
-      display:block;
-      // border: 1px solid $border;
-      padding:20px;
-      color:$text;
-      text-decoration:none;
-      cursor: pointer;
-      // margin-left:10px;
-    }
+.appContainer {
+  .filter {
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-bottom: 20px;
+    color: $filter;
   }
- } 
-}
-
-.okrtree {
-  ul {
-    li {
-      span {
-        &:hover,
-        &:focus {
-          background: $bg-hover; 
-          color: $text-hover; 
-          border: 1px solid $border-hover;
-          & + ul {
-            li {
-              span {
-                background: $bg-hover; 
-                color: $text-hover; 
-                border: 1px solid $border-hover;
-              }
-            }
-          }
+  .error {
+    text-align: center;
+    font-size: 30px;
+    color: red;
+  }
+  .okrtree {
+    .panel-collapse {
+      max-height: 500px;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .panel-close {
+      max-height: 0;
+    }
+    .panel-title {
+      cursor: pointer;
+      height: 40px;
+      .btn-custom {
+        border: none;
+        background-color: none;
+        background: none;
+        outline: none;
+        font-size: 20px;
+        position: relative;
+        color: #888;
+        .usericons {
+          position: absolute;
+          left: 20px;
         }
-
-        &:hover + ul, 
-        &:focus + ul {
-          li {
-            &:after,&:before {
-              border-color:  $border-hover;
-              background: $bg-hover;
-            }
-          }
+        .content {
+          margin-left: 40px;
+        }
+        .arrow {
+          width: 0;
+          height: 0;
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-top: 7px solid #555;
+          display: inline-block;
+        }
+        .up {
+          transform: rotate(180deg);
+          -webkit-transform: rotate(180deg);
+        }
+        .down {
+          transform: rotate(0deg);
+          -webkit-transform: rotate(0deg);
+        }
+      }
+    }
+    .usericonschild {
+      position: absolute;
+      left: 85px;
+    }
+    ul {
+      li {
+        list-style-type: none;
+        margin: 10px 0;
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          left: $left;
+          border-left: 2px solid $border;
+          border-bottom: 2px solid $border;
+          width: $ident;
+          height: 41px;
+          top: -11px;
+        }
+        &:after {
+          position: absolute;
+          content: "";
+          top: 30px;
+          left: $left;
+          border-left: 2px solid $border;
+          border-top: 2px solid $border;
+          width: $ident;
+          height: 100%;
+        }
+        &:last-child:after {
+          display: none;
+        }
+        span {
+          display: block;
+          padding: 20px;
+          color: $text;
+          text-decoration: none;
+          cursor: pointer;
+          margin-left: 100px;
         }
       }
     }
   }
-}
-
-.panel-group {
-  margin-top: 30px;
-}
-.arrow {
-  width: 0;
-	height: 0;
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	border-top: 7px solid #555;
-  display: inline-block;
-}
-.up {
-  transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-}
-
-.down {
-  transform: rotate(0deg);
-  -webkit-transform: rotate(0deg);
-}
-
-
-.panel-collapse {
-  max-height: 500px;
-  overflow: hidden;
-  transition: max-height .5s ease;
-  margin-left:20px;
-
-}
-.panel-close {
-  max-height: 0;
-}
-.panel-title{
-  cursor: pointer;
-}
-.filter{
-  display: block;
-  text-align: right;
-}
-.usericons{
- position: absolute; 
- left:20px;
-}
-
-.usericonschild{
-  position: absolute; 
-  left:-2px;
-  margin-right:20px;
- }
-
-
-
-.content {
-  margin-left: 40px;
+  .okrtree {
+    ul {
+      li:nth-child(odd) {
+        background: $bg-hover;
+        color: $text-hover;
+        &:hover,
+        &:focus {
+          background: $background;
+          color: $text-hover;
+        }
+      }
+      li:nth-child(even) {
+        background: $background;
+        color: $text;
+        &:hover,
+        &:focus {
+          background: $bg-hover;
+          color: $text-hover;
+        }
+      }
+    }
+  }
 }
