@@ -4,6 +4,7 @@ import filter from "lodash/filter";
 /*
   The function is used for data formattting of api response.
 */
+
 const getChildData = (parents, allData) => {
   return map(parents, (item) => {
     const id = item.id;
