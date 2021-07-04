@@ -4,11 +4,12 @@ import filter from "lodash/filter";
 import indexOf from "lodash/indexOf";
 import findIndex from "lodash/findIndex";
 import TreeView from "./components/OkrView";
-import FilterComponets from "./components/Filter";
-import "./App.scss";
+import FilterComponets from "./components/FilterData";
 import getChildData from "./utill";
 import { GET_OKR } from './config'
 import { LOCALE } from './constants'
+import "./App.scss";
+
 
 const App = () => {
 
@@ -20,7 +21,7 @@ const App = () => {
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState("");
 
-  
+
   const customizeData = useCallback((allData) => {
     setAllData(allData);
     const filterArray = [];
