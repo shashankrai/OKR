@@ -1,8 +1,8 @@
 import React from "react";
 import map from "lodash/map";
 import "./popup.scss";
- /*
-  The component is used for showing popup for child component more details .
+/*
+ The component is used for showing popup for child component more details .
 */
 const Popup = (props) => {
   return (
@@ -16,7 +16,7 @@ const Popup = (props) => {
           <div>
             {map(props.content.child, (val, key) => (
               <p>
-                {key}:{val}
+                <span className="cellVal"> {key}:</span><span className="cellVal"> {val} </span>
               </p>
             ))}
           </div>
