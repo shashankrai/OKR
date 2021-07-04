@@ -4,6 +4,9 @@ import uuid from "react-uuid";
 import PropTypes from "prop-types";
 import "../components/components.scss";
 
+ /*
+  The component is used for filtering data 
+*/
 const FilterComponets = ({ selectedfilter, onChange, label, filters }) => {
   return (
     <div className="filter">

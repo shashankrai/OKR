@@ -1,7 +1,9 @@
 import React from "react";
 import map from "lodash/map";
 import "./popup.scss";
-
+ /*
+  The component is used for showing popup for child component more details .
+*/
 const Popup = (props) => {
   return (
     <div className="popup-box">

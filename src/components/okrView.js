@@ -7,8 +7,14 @@ import PropTypes from "prop-types";
 import Popup from "./Popup";
 import "../components/components.scss";
 
+ /*
+  The component for showing loader while fetching data
+*/
 const MyBulletListLoader = () => <BulletList />;
 
+ /*
+  The component is used for gernerating tree structure .
+*/
 const TreeView = ({ allData, onToggle, loader }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState({});
