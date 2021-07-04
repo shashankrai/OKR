@@ -7,11 +7,11 @@ import TreeView from "./components/OkrView";
 import FilterComponets from "./components/Filter";
 import "./App.scss";
 import getChildData from "./utill";
+import { GET_OKR } from './config'
+import { LOCALE } from './constants'
 
 const App = () => {
-  /*
-  The initial value of componet variable .
-*/
+
   const [isOpen, setIsOpen] = useState(true);
   const [filters, setFilter] = useState([]);
   const [selectedfilter, setSelected] = useState("");
@@ -20,6 +20,7 @@ const App = () => {
   const [loader, setLoader] = useState(true);
   const [error, setError] = useState("");
 
+  
   const customizeData = useCallback((allData) => {
     setAllData(allData);
     const filterArray = [];
@@ -47,11 +48,12 @@ and set the global data for components
 */
 
   useEffect(() => {
-    fetch("https://okrcentral.github.io/sample-okrs/db.json")
+    const API_ERROR = { LOCALE };
+    fetch(GET_OKR)
       .then((results) => {
         if (!results.ok) {
           setLoader(false);
-          throw new Error("Error in fetching data from api");
+          throw new Error(API_ERROR);
         }
         return results.json();
       })
@@ -64,9 +66,9 @@ and set the global data for components
         setError(error.message);
       });
   }, [customizeData]);
-  
+
   /*
-The hook below will keep  checking is any filter is applied if applied it updated and render .
+The hook below will keep  checking is any filter is applied if applied it updated and render.
 */
 
   useEffect(() => {
@@ -80,15 +82,14 @@ The hook below will keep  checking is any filter is applied if applied it update
   }, [selectedfilter, allData]);
 
   /*
-    The fuction below will called when toogle is to update the component .
+    The fuction below will called when toogle is to update the component.
 */
 
   useEffect(() => {
-    console.log("Toggling is done on parents and child");
   }, [isOpen]);
 
   /*
-    The fuction below will called when toogle is done on parents .
+    The fuction below will called when toogle is done on parents.
 */
 
   const onToggle = (item) => {
@@ -99,7 +100,7 @@ The hook below will keep  checking is any filter is applied if applied it update
   };
 
   /*
-  The function update seleted filter .
+  The function update seleted filter.
 */
 
   const handleChange = (e) => {
@@ -115,21 +116,21 @@ The hook below will keep  checking is any filter is applied if applied it update
       {error ? (
         <div className="error"> {error} </div>
       ) : (
-        <>
-          <FilterComponets
-            label={"Select Filter"}
-            onChange={handleChange}
-            selectedfilter={selectedfilter}
-            filters={filters}
-          ></FilterComponets>
-          <TreeView
-            allData={filteredData}
-            onToggle={onToggle}
-            isOpen={isOpen}
-            loader={loader}
-          ></TreeView>
-        </>
-      )}
+          <>
+            <FilterComponets
+              label={LOCALE.FILTER}
+              onChange={handleChange}
+              selectedfilter={selectedfilter}
+              filters={filters}
+            ></FilterComponets>
+            <TreeView
+              allData={filteredData}
+              onToggle={onToggle}
+              isOpen={isOpen}
+              loader={loader}
+            ></TreeView>
+          </>
+        )}
     </div>
   );
 };

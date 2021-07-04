@@ -6,14 +6,19 @@ import { BulletList } from "react-content-loader";
 import PropTypes from "prop-types";
 import Popup from "./Popup";
 import "../components/components.scss";
+import { LOCALE } from '../../src/constants'
 
- /*
-  The component for showing loader while fetching data
+const ListingVal = LOCALE.LISTING_VALUE.split("");
+
+
+
+/*
+ The component for showing loader while fetching data
 */
 const MyBulletListLoader = () => <BulletList />;
 
- /*
-  The component is used for gernerating tree structure .
+/*
+ The component is used for gernerating tree structure .
 */
 const TreeView = ({ allData, onToggle, loader }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +29,6 @@ const TreeView = ({ allData, onToggle, loader }) => {
     setIsOpen(!isOpen);
   };
 
-  const alpha = "abcdefghijklmnopqrstuvwxyz".split("");
 
   const parentsNode = (content, index) => {
     return (
@@ -52,7 +56,7 @@ const TreeView = ({ allData, onToggle, loader }) => {
             <li key={uuid()} onClick={() => togglePopup(parent, child[index])}>
               <span>
                 <AccountCircleOutlinedIcon className="usericonschild" />{" "}
-                {alpha[index]} . {item.title}
+                {ListingVal[index]} . {item.title}
               </span>
             </li>
           ))}
@@ -67,17 +71,17 @@ const TreeView = ({ allData, onToggle, loader }) => {
       {loader === true ? (
         <MyBulletListLoader />
       ) : (
-        <ul className="okrtree" key={uuid()}>
-          {map(allData, (item, index) => (
-            <li key={uuid()}>
-              {parentsNode(item.parents, index)}
-              {item.child.length > 0
-                ? childNodes(item.parents, item.child)
-                : null}
-            </li>
-          ))}
-        </ul>
-      )}
+          <ul className="okrtree" key={uuid()}>
+            {map(allData, (item, index) => (
+              <li key={uuid()}>
+                {parentsNode(item.parents, index)}
+                {item.child.length > 0
+                  ? childNodes(item.parents, item.child)
+                  : null}
+              </li>
+            ))}
+          </ul>
+        )}
     </>
   );
 };
