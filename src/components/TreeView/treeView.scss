@@ -139,16 +139,3 @@ $filter: #ff0000;
 	}
 }
 
-
-/* filter  */
-
-.filter {
-	display: block;
-	text-align: right;
-	margin-bottom: 20px;
-	margin-bottom: 20px;
-	color: $filter;
-  @media (max-width: 425px) {
-    text-align:center;
-  }
-}
