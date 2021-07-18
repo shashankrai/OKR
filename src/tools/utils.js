@@ -4,9 +4,9 @@
 
 const getChildData = (parentsNodes, allNodes) => {
   let parentId = 0;
-  parentId += 1;
   return parentsNodes.map((item) => {
     const { id } = item;
+    parentId += 1;
     const parents = item;
     parents.open = true;
     parents.parentId = parentId;

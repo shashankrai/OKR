@@ -74,17 +74,11 @@ The hook below will keep  checking is any filter is applied if applied it update
   }, [selectedfilter, allData]);
 
   /*
-    The fuction below will called when toogle is to update the component.
-*/
-
-  useEffect(() => {}, [isOpen]);
-
-  /*
     The fuction below will called when toogle is done on parents.
 */
 
   const handleToggle = (item) => {
-    const index = filteredData.findIndex(filteredData, ['parents.id', item.id]);
+    const index = filteredData.findIndex((data) => data.parents.id === item.id);
     filteredData[index].parents.open = !filteredData[index].parents.open;
     setFilteredData(filteredData);
     setIsOpen((s) => !s);

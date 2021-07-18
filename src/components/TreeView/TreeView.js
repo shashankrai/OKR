@@ -62,7 +62,7 @@ const TreeView = ({ allData, onToggle, loader }) => {
       ) : (
         <ul className="okrtree">
           {map(allData, (item, index) => (
-            <li key={item.parents.parentID}>
+            <li key={item.parents.parentId}>
               {parentsNode(item.parents, index)}
               {item.child.length > 0 ? childNodes(item.parents, item.child) : null}
             </li>
